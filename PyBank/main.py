@@ -8,7 +8,7 @@ import csv
 
 #Declare variables necessary for calculation
 TotMonths = 0
-TotPL = 0.00
+TotPL = 0
 MaxPL = 0.00
 MaxMonth = ""
 MinPL = 0.00
@@ -16,7 +16,6 @@ MinMonth = ""
 PLChange = 0.00
 LastMonthPL = 0.00
 PLAvg = 0.00
-RowCount = 0
 
 #List declaration to track average P/L changes
 PLChanges = []
@@ -40,17 +39,14 @@ with open(data_csv, 'r') as csvfile:
     #Parse the data in the file
     for row in csvreader:
         
-        #Update totals
-        TotMonths += 1
-        TotPL += int(row[1])
-        
         #Skip first row
-        if (RowCount > 0):    
+        if (TotMonths > 0):    
             #Subtract previous PL total from current to get change
             PLChange = int(row[1]) - LastMonthPL
         
-        #Update RowCount
-        RowCount += 1
+        #Update totals
+        TotMonths += 1
+        TotPL += int(row[1])
         
         #Update LastMonthPL value for next calculation
         LastMonthPL = int(row[1])
@@ -69,7 +65,7 @@ with open(data_csv, 'r') as csvfile:
             MinMonth = row[0]
     
     #Calculate the average P/L change
-    PLAvg = round(sum(PLChanges) / (RowCount - 1),2)
+    PLAvg = round(sum(PLChanges) / (TotMonths - 1),2)
 
 #-------------------------------------------
 # Output results to screen
