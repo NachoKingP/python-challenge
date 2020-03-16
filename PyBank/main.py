@@ -16,6 +16,7 @@ MinMonth = ""
 PLChange = 0.00
 LastMonthPL = 0.00
 PLAvg = 0.00
+RowCount = 0
 
 #List declaration to track average P/L changes
 PLChanges = []
@@ -43,14 +44,19 @@ with open(data_csv, 'r') as csvfile:
         TotMonths += 1
         TotPL += int(row[1])
         
-        #Subtract previous PL total from current to get change
-        PLChange = int(row[1]) - LastMonthPL
+        #Skip first row
+        if (RowCount > 0):    
+            #Subtract previous PL total from current to get change
+            PLChange = int(row[1]) - LastMonthPL
+        
+        #Update RowCount
+        RowCount += 1
         
         #Update LastMonthPL value for next calculation
         LastMonthPL = int(row[1])
         
         #Add current P/L changes to running list of total P/L changes
-        PLChanges.append(int(row[1]))
+        PLChanges.append(PLChange)
         
         #Check to see if current revenue change is greatest
         if (PLChange > MaxPL):
@@ -63,14 +69,14 @@ with open(data_csv, 'r') as csvfile:
             MinMonth = row[0]
     
     #Calculate the average P/L change
-    PLAvg = sum(PLChanges) / len(PLChanges)
+    PLAvg = round(sum(PLChanges) / (RowCount - 1),2)
 
 #-------------------------------------------
 # Output results to screen
 #-------------------------------------------
 
 print("\n \n \n")
-print("```text")
+print("```")
 print("Financial Analysis")
 print("----------------------------")
 print("Total Months: " + str(TotMonths))
