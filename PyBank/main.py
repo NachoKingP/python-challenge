@@ -17,6 +17,9 @@ PLChange = 0.00
 LastMonthPL = 0.00
 PLAvg = 0.00
 
+#Specify the file to write to
+output_path = os.path.join("output", "results.txt")
+
 #List declaration to track average P/L changes
 PLChanges = []
 
@@ -81,7 +84,19 @@ print("Average Change: $" + str(PLAvg))
 print("Greatest Increase in Profits: $" + str(MaxPL) + " in " + str(MaxMonth))
 print("Greatest Decrease in Profits: $" + str(MinPL) + " in " + str(MinMonth))
 print("```")
-    
-    
-    
-    
+
+#-------------------------------------------
+# Output results to text file
+#-------------------------------------------
+
+with open(output_path, "w") as txt_file:
+    #Write the results
+    txt_file.write("Financial Analysis \n")
+    txt_file.write("---------------------------- \n")
+    txt_file.write("Total Months: " + str(TotMonths) + " \n")
+    txt_file.write("Total: $" + str(TotPL) + " \n")
+    txt_file.write("Average Change: $" + str(PLAvg) + " \n")
+    txt_file.write("Greatest Increase in Profits: $" + str(MaxPL) + " in " + str(MaxMonth) + " \n")
+    txt_file.write("Greatest Decrease in Profits: $" + str(MinPL) + " in " + str(MinMonth) + " \n")
+
+
