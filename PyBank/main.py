@@ -1,3 +1,4 @@
+#Brian Remite python-challenge, PyBank scenario
 import os
 import csv
 
@@ -57,7 +58,7 @@ with open(data_csv, 'r') as csvfile:
             MaxMonth = row[0]
         
         #Check to see if current revenue change is lowest
-        if (PLChange < MaxPL):
+        if (PLChange < MinPL):
             MinPL = PLChange
             MinMonth = row[0]
     
