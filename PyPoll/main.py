@@ -63,7 +63,9 @@ print("----------------------------")
 for candidate in Votes:
     print(candidate + " " + str(round(((Votes[candidate] / TotVotes) * 100))) + "% (" + str(Votes[candidate]) + ")")
 
+print("------------------------------------")
 print("Winner: " + MaxCan + " with " + str(MaxVotes) + " votes.")
+print("------------------------------------")
 
 #-------------------------------------------
 # Output results to text file
@@ -77,8 +79,11 @@ with open(output_path, "w") as txt_file:
     txt_file.write("---------------------------- \n")
     for candidate in Votes:
         txt_file.write(candidate + " " + str(round(((Votes[candidate] / TotVotes) * 100))) + "% (" + str(Votes[candidate]) + ") \n")
-
-    txt_file.write("Winner: " + MaxCan + " with " + str(MaxVotes) + " votes.")
+    
+    txt_file.write("------------------------------------ \n")
+    txt_file.write("Winner: " + MaxCan + " with " + str(MaxVotes) + " votes. \n")
+    
+    txt_file.write("------------------------------------ \n")
 
 
 
